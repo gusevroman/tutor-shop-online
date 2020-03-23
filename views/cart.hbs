@@ -1,0 +1,47 @@
+<h1>Cart</h1>
+
+<div id="cart">
+
+  {{#if courses.length}}
+  <table class="responsive-table pink lighten-5">
+
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Count</th>
+        <th>Edit</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      {{#each courses}}
+      <tr>
+        <td>{{title}}</td>
+        <td>{{price}}</td>
+        <td>{{count}}</td>
+        <td>
+          <button class="btn btn-small js-remove" data-id="{{id}}">Delete</button>
+        </td>
+      </tr>
+      {{/each}}
+
+    </tbody>
+
+  </table>
+
+  <p>
+    <strong>Total price:</strong>
+    <span class="price">
+      {{price}}
+    </span>
+  </p>
+
+  {{else}}
+
+  <p>Cart is empty</p>
+
+  {{/if}}
+
+</div>
