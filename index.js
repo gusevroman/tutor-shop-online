@@ -8,6 +8,8 @@ const addRoutes = require('./routes/add');
 const coursesRoutes = require('./routes/courses');
 const cartRoutes = require('./routes/cart');
 
+const mongoDBB = 'mongodb+srv://rom:alex@cluster0-ndyz8.mongodb.net/tutor';
+
 const pathPublic = path.join(__dirname, 'public');
 
 const app = express();
