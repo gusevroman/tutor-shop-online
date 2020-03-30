@@ -35,3 +35,15 @@
 .btn-shop {
     background-color: red;
 }
+
+.icon-delete:hover {
+    color: #ff00008a;
+}
+
+.icon-delete:active {
+    color: red;
+}
+
+.course-form {
+    margin-bottom: 1.5rem;
+}
