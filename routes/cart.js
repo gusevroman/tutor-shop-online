@@ -6,7 +6,7 @@ const router = Router();
 
 router.post('/add', async (req, res) => {
   const { id } = req.body;
-  const course = await Course.getById(id);
+  const course = await Course.findById(id);
   await Cart.add(course);
   res.redirect('/cart');
 });
