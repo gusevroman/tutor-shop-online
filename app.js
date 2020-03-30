@@ -1,5 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const Handlebars = require('handlebars'); // add https://stackoverflow.com/questions/59690923/handlebars-access-has-been-denied-to-resolve-the-property-from-because-it-is
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access'); // add
 const logger = require('morgan');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -18,6 +20,7 @@ const app = express();
 const hbs = exphbs.create({
   defaultLayout: 'main',
   extname: 'hbs',
+  handlebars: allowInsecurePrototypeAccess(Handlebars), // add
 });
 
 // connect express-handlebars
@@ -28,6 +31,7 @@ app.set('views', 'views');
 app.use(logger('dev'));
 
 app.use(express.static(pathPublic));
+// app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/', homeRoutes);
@@ -47,7 +51,7 @@ const start = async () => {
       useFindAndModify: true,
     });
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}...`);
+      console.log(`Server is running on port ${PORT} ...`);
     });
   } catch (error) {
     console.log(`!!! Attention: Server isn't started. \n ${error}`);

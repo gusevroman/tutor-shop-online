@@ -4,7 +4,8 @@ const Course = require('../models/course');
 const router = Router();
 
 router.get('/', async (req, res) => {
-  const courses = await Course.find({}).lean(); // added lean() for getting JSON instead of mongoose documents
+  console.log('>>>>>>>>>>>>>>>>>>>>    /');
+  const courses = await Course.find({}).lean(); // added lean() for getting JSON
   res.render('courses', {
     title: 'Courses',
     isCourses: true,
@@ -12,24 +13,28 @@ router.get('/', async (req, res) => {
   });
 });
 
-router.get('/:id/edit', async (req, res) => {
-  if (!req.query.allow) {
-    return res.redirect('/');
+router.get('/:id/edit', (req, res) => {
+  try {
+    const { id } = req.params;
+    Course.findById(id)
+      .then((course) => {
+        res.render('course-edit', {
+          title: `Edite Course ${course.title}`,
+          course,
+        });
+      }).catch((error) => {
+        console.log(`Don\'t find and edit courseo. \n ${error}`);
+      });
+  } catch (error) {
+    console.log(`Do not find course with id ${id}. \nError: ${error}`);
   }
-  const { id } = req.params;
-  const course = await Course.findById({ id });
-
-  res.render('course-edit', {
-    title: `Edit ${course.title}`,
-    course,
-  });
 });
 
-router.post('/edit', async (req, res) => {
+router.post('/edit', (req, res) => {
   const { id } = req.body;
   delete req.body.id;
-  await Course.findByIdAndUpdate(id, req.body);
-  res.redirect('/courses');
+  Course.findByIdAndUpdate(id, req.body)
+    .then(res.redirect('/courses'));
 });
 
 router.get('/:id', async (req, res) => {

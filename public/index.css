@@ -31,3 +31,7 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.btn-shop {
+    background-color: red;
+}
