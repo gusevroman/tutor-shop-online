@@ -13,9 +13,15 @@ router.get('/', (req, res) => {
 
 
 router.post('/', async (req, res) => {
-  const course = new Course(req.body.title, req.body.price, req.body.img);
-  await course.save();
-  res.redirect('/courses');
+  const { title, price, img } = req.body;
+  console.log(title, price);
+  const course = new Course({ title, price, img });
+  try {
+    await course.save();
+    res.redirect('/courses');
+  } catch (error) {
+    console.log(`New Course don't created \n ${error}`);
+  }
 });
 
 
