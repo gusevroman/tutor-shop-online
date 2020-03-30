@@ -4,7 +4,6 @@ const Course = require('../models/course');
 const router = Router();
 
 router.get('/', async (req, res) => {
-  console.log('>>>>>>>>>>>>>>>>>>>>    /');
   const courses = await Course.find({}).lean(); // added lean() for getting JSON
   res.render('courses', {
     title: 'Courses',
@@ -23,10 +22,10 @@ router.get('/:id/edit', (req, res) => {
           course,
         });
       }).catch((error) => {
-        console.log(`Don\'t find and edit courseo. \n ${error}`);
+        console.log(`Don't find and edit courseo. \n ${error}`);
       });
   } catch (error) {
-    console.log(`Do not find course with id ${id}. \nError: ${error}`);
+    console.log(`Do not find course. \nError: ${error}`);
   }
 });
 
@@ -35,6 +34,15 @@ router.post('/edit', (req, res) => {
   delete req.body.id;
   Course.findByIdAndUpdate(id, req.body)
     .then(res.redirect('/courses'));
+});
+
+router.post('/delete', (req, res) => {
+  try {
+    Course.deleteOne({ _id: req.body.id })
+      .then(res.redirect('/courses'));
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 router.get('/:id', async (req, res) => {
