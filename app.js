@@ -11,6 +11,9 @@ const addRoutes = require('./routes/add');
 const coursesRoutes = require('./routes/courses');
 const cartRoutes = require('./routes/cart');
 
+// tmp
+const User = require('./models/user');
+
 const mongoDB = 'mongodb+srv://rom:alex@cluster0-0k0hb.mongodb.net/tutor';
 
 const pathPublic = path.join(__dirname, 'public');
@@ -29,6 +32,18 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 app.use(logger('dev'));
+
+// >>
+app.use(async (req, res, next) => {
+  try {
+    const user = await User.findById('5e8258069a07995f58238743');
+    req.user = user;
+    next();
+  } catch (error) {
+    console.log(error);
+  }
+});
+// <<
 
 app.use(express.static(pathPublic));
 // app.use(express.json());
@@ -50,6 +65,20 @@ const start = async () => {
       useNewUrlParser: true,
       useFindAndModify: false,
     });
+
+    // tmp_start
+    const candidate = await User.findOne();
+    if (!candidate) {
+      const user = new User({
+        name: 'Feodor',
+        email: 'feodor@gmail.com',
+        cart: { items: [] },
+      });
+
+      await user.save();
+    }
+    // tmp_end
+
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT} ...`);
     });
