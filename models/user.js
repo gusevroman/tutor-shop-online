@@ -33,6 +33,8 @@ const userSchema = new Schema({
 });
 
 
+// ____ Methods
+
 userSchema.methods.addToCart = function (course) {
   const items = [...this.cart.items];
   const idx = items.findIndex((el) => el.courseId.toString() === course._id.toString());
@@ -50,6 +52,7 @@ userSchema.methods.addToCart = function (course) {
   return this.save();
 };
 
+
 userSchema.methods.removeFromeCart = function (id) {
   let items = [...this.cart.items];
   const idx = items.findIndex((el) => el.courseId.toString() === id.toString());
@@ -61,6 +64,12 @@ userSchema.methods.removeFromeCart = function (id) {
   }
 
   this.cart = { items };
+  return this.save();
+};
+
+
+userSchema.methods.clearCart = function () {
+  this.cart = { items: [] };
   return this.save();
 };
 

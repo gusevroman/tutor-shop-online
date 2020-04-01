@@ -33,6 +33,18 @@
         <li> <a href="/cart">My cart</a> </li>
         {{/if}}
 
+        {{#if isOrder}}
+        <li class="active"> <a href="/orders">Orders</a> </li>
+        {{else}}
+        <li> <a href="/orders">Orders</a> </li>
+        {{/if}}
+
+        {{#if isLogin}}
+        <li class="active"> <a href="/profile">Profile{{req.params.user}}</a> </li>
+        {{else}}
+        <li> <a href="/profile">Profile{{order.user.userId.name}}</a> </li>
+        {{/if}}
+
       </ul>
     </div>
   </nav>

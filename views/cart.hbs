@@ -3,7 +3,7 @@
 <div id="cart">
 
   {{#if courses.length}}
-  <table class="responsive-table pink lighten-5">
+  <table class="responsive-table">
 
     <thead>
       <tr>
@@ -32,11 +32,17 @@
   </table>
 
   <p>
-    <strong>Total price:</strong>
+    <strong>Total price: </strong>
     <span class="price">
       {{price}}
     </span>
   </p>
+
+  <form action="/orders" method="POST">
+    <button class="btn waves-effect waves-light" type="submit" name="action">
+      Order
+    </button>
+  </form>
 
   {{else}}
 

@@ -6,8 +6,24 @@ const toCurrency = (price) => new Intl.NumberFormat(
   },
 ).format(price);
 
-document.querySelectorAll('.price').forEach((el) => {
-  el.textContent = toCurrency(el.textContent);
+const toDate = (date) => new Intl.DateTimeFormat(
+  'eu-EU',
+  {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+  },
+).format(date);
+
+document.querySelectorAll('.price').forEach((node) => {
+  node.textContent = toCurrency(node.textContent);
+});
+
+document.querySelectorAll('.date').forEach((node) => {
+  node.textContent = toDate(node.textContenT);
 });
 
 
