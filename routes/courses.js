@@ -4,12 +4,10 @@ const Course = require('../models/course');
 const router = Router();
 
 router.get('/', async (req, res) => {
-  // const courses = await Course.find({});// .lean(); // added lean() for getting JSON
   const courses = await Course.find({})
     .populate('userId', 'name')
     .select('price title img');
 
-  console.log('courses: \n', courses);
   res.render('courses', {
     title: 'Courses',
     isCourses: true,

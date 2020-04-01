@@ -17,6 +17,7 @@ function cartPrice(courses) {
   return courses.reduce((total, course) => total += course.price * course.count, 0);
 }
 
+
 router.post('/add', async (req, res) => {
   const { id } = req.body;
   const course = await Course.findById(id);
@@ -50,7 +51,6 @@ router.get('/', async (req, res) => {
     courses,
     price: cartPrice(courses),
   });
-  // res.json({ cart: 'is broke' });
 });
 
 module.exports = router;
