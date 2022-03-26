@@ -19,7 +19,7 @@
         "express": "^4.17.1",
         "express-handlebars": "^3.1.0",
         "handlebars": "^4.7.3",
-        "minimist": "^1.2.5",
+        "minimist": "^1.2.6",
         "mongoose": "^5.9.6",
         "morgan": "^1.10.0",
         "uuid": "^7.0.2"
