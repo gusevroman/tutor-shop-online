@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@handlebars/allow-prototype-access": "^1.0.3",
-        "express": "^4.17.1",
+        "express": "^4.17.3",
         "express-handlebars": "^3.1.0",
         "handlebars": "^4.7.3",
         "minimist": "^1.2.5",
